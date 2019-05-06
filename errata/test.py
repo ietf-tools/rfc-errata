@@ -204,7 +204,7 @@ class TestInline(unittest.TestCase):
     def test_one(self):
         with open("Tests/inline-one.json") as f:
             errata = json.load(f)
-        if not os.exists("Temp"):
+        if not os.path.exists("Temp"):
             os.mkdir("Temp")
         state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
         options = Values(defaults={'search': False})
@@ -224,7 +224,7 @@ class TestInline(unittest.TestCase):
     def test_two(self):
         with open("Tests/inline-two.json") as f:
             errata = json.load(f)
-        if not os.exists("Temp"):
+        if not os.path.exists("Temp"):
             os.mkdir("Temp")
         state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
         options = Values(defaults={'search': False})
@@ -244,7 +244,7 @@ class TestInline(unittest.TestCase):
     def test_three(self):
         with open("Tests/inline-three.json") as f:
             errata = json.load(f)
-        if not os.exists("Temp"):
+        if not os.path.exists("Temp"):
             os.mkdir("Temp")
         state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
         options = Values(defaults={'search': False})
@@ -264,7 +264,7 @@ class TestInline(unittest.TestCase):
     def test_four(self):
         with open("Tests/inline-four.json") as f:
             errata = json.load(f)
-        if not os.exists("Temp"):
+        if not os.path.exists("Temp"):
             os.mkdir("Temp")
         state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
         options = Values(defaults={'search': False})
@@ -284,7 +284,7 @@ class TestInline(unittest.TestCase):
     def test_five(self):
         with open("Tests/inline-five.json") as f:
             errata = json.load(f)
-        if not os.exists("Temp"):
+        if not os.path.exists("Temp"):
             os.mkdir("Temp")
         state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
         options = Values(defaults={'search': False})
@@ -304,7 +304,7 @@ class TestInline(unittest.TestCase):
     def test_six(self):
         with open("Tests/inline-six.json") as f:
             errata = json.load(f)
-        if not os.exists("Temp"):
+        if not os.path.exists("Temp"):
             os.mkdir("Temp")
         state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
         options = Values(defaults={'search': False})
@@ -324,7 +324,7 @@ class TestInline(unittest.TestCase):
     def test_seven(self):
         with open("Tests/inline-seven.json") as f:
             errata = json.load(f)
-        if not os.exists("Temp"):
+        if not os.path.exists("Temp"):
             os.mkdir("Temp")
         state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
         options = Values(defaults={'search': False})
