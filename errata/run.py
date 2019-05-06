@@ -179,12 +179,12 @@ def main2():
     else:
         for rfc in args:
             check.processRFC(rfc, options.force, templates)
-            if False:
-                with open('rfc/' + rfc + '.txt') as f:
-                    text = f.read()
-                html = markup(text)
-                with open('html2/' + rfc + '.html', "w") as f:
-                    f.write(html)
+            # if False:
+            #    with open('rfc/' + rfc + '.txt') as f:
+            #        text = f.read()
+            #    html = markup(text)
+            #    with open('html2/' + rfc + '.html', "w") as f:
+            #        f.write(html)
 
     check.printStats()
 
