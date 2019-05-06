@@ -111,10 +111,14 @@ class checker(object):
         self.byRfc = byRfc
 
     def processRFC(self, rfc, force, templates):
-        txt_file = "rfc/{0}.txt".format(rfc)
+        if rfc not in self.byRfc:
+            print("{0} does not have any current errata".format(rfc))
+            return
+
+        txt_file = os.path.join(self.state["text"], "{0}.txt".format(rfc))
 
         if not os.path.isfile(txt_file):
-            connection = HTTPSConnection("www.rfc-editor.org")
+            connection = HTTPSConnection(self.state["serverName"])
 
             # print("RFC = {0}".format(rfc))
             rfcNum = int(rfc[3:])
@@ -152,11 +156,11 @@ class checker(object):
         allLines = self.inlineCount + self.sectionCount + self.endnoteCount
         if allLines == 0:
             allLines = 1
-        print("Inline  = {0:4}     {1:2.2f}     3946".format(self.inlineCount,
+        print("Inline  = {0:4}     {1:2.2f}     4078".format(self.inlineCount,
                                                              self.inlineCount/allLines*100))
-        print("Section = {0:4}     {1:2.2f}     1125".format(self.sectionCount,
+        print("Section = {0:4}     {1:2.2f}     1002".format(self.sectionCount,
                                                              self.sectionCount/allLines*100))
-        print("End     = {0:4}     {1:2.2f}      422".format(self.endnoteCount,
+        print("End     = {0:4}     {1:2.2f}      415".format(self.endnoteCount,
                                                              self.endnoteCount/allLines*100))
         print("Total   = {0:4}".format(allLines))
 

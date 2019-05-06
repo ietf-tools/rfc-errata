@@ -64,8 +64,8 @@ class apply_errata(object):
 
     def apply(self, force, templates):
         self.RfcName = self.toApply[0]["doc-id"]
-        fileName = "rfc/" + self.RfcName + ".txt"
-        htmlFile = "html/" + self.RfcName + ".html"
+        fileName = os.path.join(self.state["text"],  self.RfcName + ".txt")
+        htmlFile = os.path.join(self.state["html"],  self.RfcName + ".html")
 
         self.templates = templates
 
@@ -93,14 +93,6 @@ class apply_errata(object):
                 return
 
         #  Open the source file and read in.
-
-        OldFormat = ["RFC1633", "RFC2136", "RFC2328", "RFC2361"]
-
-        if False:
-            if int(self.RfcName[3:]) > 1350 and self.RfcName not in OldFormat:
-                self.header_re = self.header_re1
-            else:
-                self.header_re = self.header_re2
 
         self.buildHeader()
 
@@ -329,7 +321,7 @@ class apply_errata(object):
 
         string = html.escape(string)
 
-        for ch in ['\\', '`', '*', '+', '?', '(', ')', '=', '[', ']', '.', '{', '}', '~', '$', '^', '|', '-']:
+        for ch in ['\\', '`', '*', '+', '?', '(', ')', '=', '[', ']', '.', '{', '}', '~', '$', '^', '|']:
             if ch in string:
                 string = string.replace(ch, "\\"+ch)
 

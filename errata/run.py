@@ -3,7 +3,7 @@ import sys
 import os
 import optparse
 from checker import checker
-from rfc2html import markup
+# from rfc2html import markup
 from template import Templates
 import errata
 
@@ -179,7 +179,7 @@ def main2():
     else:
         for rfc in args:
             check.processRFC(rfc, options.force, templates)
-            if True:
+            if False:
                 with open('rfc/' + rfc + '.txt') as f:
                     text = f.read()
                 html = markup(text)
