@@ -102,3 +102,24 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+
+# cleanup of emacs files
+*~
+#*
+*#
+.#*
+
+# exclude Visual Studio files
+*.suo
+*.pyproj
+*.sln
+
+# other windows files
+*.bat
+
+
+#  Other test files
+
+RFC*.txt
+RFC*.html
