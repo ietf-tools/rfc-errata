@@ -13,7 +13,7 @@ from template import Templates
 from apply_errata import apply_errata
 from optparse import Values
 
-test_program = "errata"
+test_program = "rfc-errata"
 
 
 def which(program):
@@ -465,6 +465,6 @@ if __name__ == '__main__':
             test_program += '.exe'
         test_program = which(test_program)
         if test_program is None:
-            print("Failed to find the rfclint for testing")
+            print("Failed to find the rfc-errata for testing")
             test_program = "run.py"
     unittest.main(buffer=True)
