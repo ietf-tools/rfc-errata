@@ -223,7 +223,7 @@ class apply_errata(object):
             if self.sectionIndent and lpad != self.sectionIndent * (len(frags)-1):
                 return None, True
             elif self.sectionIndent is None:
-                    return None, True
+                return None, True
         elif lpad > 0:
             return None, True
 
@@ -351,7 +351,6 @@ class apply_errata(object):
         if len(lines) == 0:
             return None
 
-        
         newLines = []
         for line in lines:
             line = line.txt

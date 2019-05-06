@@ -209,7 +209,7 @@ class TestInline(unittest.TestCase):
 
         doc = apply_errata(errata, options, state)
 
-        templates = Templates(os.path.join(os.path.dirname(__file__), "template"))
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
 
         doc.apply(True, templates)
 
@@ -227,7 +227,7 @@ class TestInline(unittest.TestCase):
 
         doc = apply_errata(errata, options, state)
 
-        templates = Templates(os.path.join(os.path.dirname(__file__), "template"))
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
 
         doc.apply(True, templates)
 
@@ -245,7 +245,7 @@ class TestInline(unittest.TestCase):
 
         doc = apply_errata(errata, options, state)
 
-        templates = Templates(os.path.join(os.path.dirname(__file__), "template"))
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
 
         doc.apply(True, templates)
 
@@ -263,7 +263,7 @@ class TestInline(unittest.TestCase):
 
         doc = apply_errata(errata, options, state)
 
-        templates = Templates(os.path.join(os.path.dirname(__file__), "template"))
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
 
         doc.apply(True, templates)
 
@@ -281,7 +281,7 @@ class TestInline(unittest.TestCase):
 
         doc = apply_errata(errata, options, state)
 
-        templates = Templates(os.path.join(os.path.dirname(__file__), "template"))
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
 
         doc.apply(True, templates)
 
@@ -299,7 +299,7 @@ class TestInline(unittest.TestCase):
 
         doc = apply_errata(errata, options, state)
 
-        templates = Templates(os.path.join(os.path.dirname(__file__), "template"))
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
 
         doc.apply(True, templates)
 
@@ -317,7 +317,7 @@ class TestInline(unittest.TestCase):
 
         doc = apply_errata(errata, options, state)
 
-        templates = Templates(os.path.join(os.path.dirname(__file__), "template"))
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
 
         doc.apply(True, templates)
 
