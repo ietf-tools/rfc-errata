@@ -118,7 +118,7 @@ setup(
 
     entry_points={
         'console_scripts': [
-            'rc-errata=errata.run:main'
+            'rfc-errata=errata.run:main'
             ]
         },
     zip_safe=False
