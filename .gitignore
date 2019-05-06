@@ -123,3 +123,10 @@ venv.bak/
 
 RFC*.txt
 RFC*.html
+errata/html
+errata/txt/
+errata/html-old/**
+*.out
+*.json
+*.prof
+errata/Results/css/*
