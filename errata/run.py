@@ -2,14 +2,14 @@ import json
 import sys
 import os
 import optparse
-from checker import checker
+from errata.checker import checker
 # from rfc2html import markup
-from template import Templates
-import errata
+from errata.template import Templates
+from errata.__init__ import __version__
 
 
 def display_version(self, opt, value, parser):
-    print(errata.__version__)
+    print(__version__)
     sys.exit()
 
 

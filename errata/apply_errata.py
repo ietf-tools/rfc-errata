@@ -2,7 +2,7 @@ import re
 import os
 import html
 from datetime import datetime
-from utils import strip_pagebreaks
+from errata.utils import strip_pagebreaks
 
 order = {"Verified": 1, "Held": 2, "Reported": 3, "Rejected": 4}
 
