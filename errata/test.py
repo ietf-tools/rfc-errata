@@ -6,7 +6,6 @@ import os
 import sys
 import subprocess
 import difflib
-import six
 import json
 from template import Templates
 
@@ -345,25 +344,17 @@ class TestInline(unittest.TestCase):
 def compare_file2(errFile, stderr, displayError):
     with open(stderr, 'rb') as f:
         stderr = f.read()
-    if six.PY2:
-        lines1 = stderr.decode('utf-8')
-    else:
-        lines1 = stderr
+    lines1 = stderr
     return compare_file(errFile, lines1, displayError)
 
 
 def compare_file(errFile, stderr, displayError):
-    if six.PY2:
-        with open(errFile, 'r') as f:
-            lines2 = f.readlines()
-        lines1 = stderr.splitlines(True)
-    else:
-        with open(errFile, 'r', encoding='utf8') as f:
-            lines2 = f.readlines()
-        if isinstance(stderr, str):
-            with open(stderr, 'rb') as f:
-                stderr = f.read()
-        lines1 = stderr.decode('utf-8').splitlines(True)
+    with open(errFile, 'r', encoding='utf8') as f:
+        lines2 = f.readlines()
+    if isinstance(stderr, str):
+        with open(stderr, 'rb') as f:
+            stderr = f.read()
+    lines1 = stderr.decode('utf-8').splitlines(True)
 
     if os.name == 'nt':
         lines2 = [line.replace('Tests/', 'Tests\\') for line in lines2]
@@ -415,10 +406,7 @@ def check_process(tester, args, stdoutFile, errFiles, generatedFile, compareFile
         with open(stdoutFile, 'r') as f:
             lines2 = f.readlines()
 
-        if six.PY2:
-            lines1 = stdoutX.splitlines(True)
-        else:
-            lines1 = stdoutX.decode('utf-8').splitlines(True)
+        lines1 = stdoutX.decode('utf-8').splitlines(True)
 
         if os.name == 'nt':
             lines2 = [line.replace('Tests/', 'Tests\\') for line in lines2]

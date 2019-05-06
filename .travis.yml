@@ -16,10 +16,6 @@ matrix:
           env: PYTHON=python PIP=pip  MALLOC_CHECK_=3
           dist: xenial
         - os: linux
-          python: 3.8
-          env: PYTHON=python PIP=pip  MALLOC_CHECK_=3
-          dist: xenial
-        - os: linux
           python: pypy3
           env: PYTHON=python PIP=pip BAP=rfclint/linux
         - os: osx
