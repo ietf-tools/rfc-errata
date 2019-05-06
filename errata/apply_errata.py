@@ -315,9 +315,9 @@ class apply_errata(object):
         #  \u2026   ---- 1117 - RFC 4601  --- ... - ellipsis
         #  \u2014   ---- 4483 - RFC 5952  --- emdash
 
-        string = string.replace("\u2018", "'").replace("\u201B", "'"). \
-                 replace('\u2019', "'").replace('\u201C', "'"). \
-                 replace("\u201C", '"').replace('\u201D', '"')
+        # string = string.replace("\u2018", "'").replace("\u201B", "'"). \
+        #          replace('\u2019', "'").replace('\u201C', "'"). \
+        #          replace("\u201C", '"').replace('\u201D', '"')
 
         string = html.escape(string)
 
@@ -326,7 +326,7 @@ class apply_errata(object):
                 string = string.replace(ch, "\\"+ch)
 
         string = string.strip()
-        string = re.sub("\s+", "\\s+", string)
+        string = re.sub(r"\s+", r"\\s+", string)
         return re.compile(string)
 
     def buildPattern2(self, item):
