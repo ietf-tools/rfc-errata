@@ -25,8 +25,8 @@ matrix:
           env: TOXENV=py36 PYTHON=python3 PIP=pip3 BAP=rfclint/macos
 
 script:
-  - pip insetall pycodestyle
-  - pip insetall pyflakes
+  - pip install pycodestyle
+  - pip install pyflakes
   - export PATH=$PATH:${HOME}/build/Com-AugustCellars/Rfc-Errata/$BAP
   - pwd
   - python --version
