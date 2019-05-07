@@ -51,6 +51,33 @@ run either to update all RFCs that have errata or only a specific set of RFCs
     ``-V``           ``--version``           display the version number and exit
     ===============  ======================= ==================================================
 
+Operations
+==========
+
+The tool can be used in a batch mode which is designed to be used in a cron job.
+For this purpose, only the documents which have new errata will be regenerated and published to
+the necessary locations.  Documents for which errata are removed will not be regenerated as
+there is no notification to that fact.
+
+The tool stores information in the file status.json in the CWD.  This file is used to remember
+command line options between different invocations of the tool.  This means that, for example,
+the set of errata to be applied is remembered between invocations and does not need to be
+specified every time.  The tool also stores the file errata.json in the CWD.
+
+When failures occur during processing, they are logged into the file "errors.log" in the CWD.
+
+The default values for options are:
+
+- server =  www.rfc-editor.org
+- templates from the installation directory of rfc-errata
+- html  = ./html
+- text  = ./rfc
+- css  = ./css
+- reported = no
+- rejected = no
+- held = yes
+- verified = yes
+
 Dependencies
 ============
 

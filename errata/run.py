@@ -163,15 +163,15 @@ def main2():
 
     #  Create directories if needed
 
-    if not os.path.isdir("rfc"):
-        os.mkdir("rfc")
-    if not os.path.isdir("html"):
-        os.mkdir("html")
+    if not os.path.isdir(state["text"]):
+        os.mkdir(state["text"])
+    if not os.path.isdir(state["html"]):
+        os.mkdir(state["html"])
 
     if "templateDir" in state:
         templates_path = state["templateDir"]
     else:
-        templates_path = os.path.join(os.path.dirname(__file__), "template")
+        templates_path = os.path.join(os.path.dirname(__file__), "Template")
     templates = Templates(templates_path)
 
     if options.all:
