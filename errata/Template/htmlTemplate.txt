@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+    <head profile="http://dublincore.org/documents/2008/08/04/dc-html/">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <meta name="robots" content="index,follow" />
+
+        <link rel="icon" href="$PATH/images/rfc.png" type="image/png" />
+        <link rel="shortcut icon" href="$PATH/images/rfc.png" type="image/png" />
+        <title>$TITLE</title>
+    
+        <link rel="stylesheet" type="text/css" href="$PATH/errata-base.css"/>
+        <link rel="stylesheet" type="text/css" href="$PATH/errata-color.css" title="Default: Basic Colors"/>
+        <link rel="alternative stylesheet" type="text/css" href="$PATH/errata-monochrome.css" title="Monochrome"/>
+        <link rel="alternative stylesheet" type="text/css" href="$PATH/errata-printer.css" title="Printer"/>
+
+        <script src="$PATH/errata.js"></script>
+    </head>
+    <body>
+        $HEADER
+        <pre>
+$BODY
+        </re>
+        $FOOTER
+    </body>
+</html>

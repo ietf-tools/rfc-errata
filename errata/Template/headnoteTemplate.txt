@@ -1,0 +1,4 @@
+<div class='$status_tag-headnote-styling'>
+This document has been updated by the following '$status_tag' errata:
+$errata_list
+</div>

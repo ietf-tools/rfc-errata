@@ -1,0 +1,36 @@
+[
+    {
+        "errata_id": 1,
+        "doc-id": "RFC8275",
+        "errata_status_code": "Verified",
+        "errata_status_code": "Editorial",
+        "section": "1",
+        "orig_text": "Section 6.4.1.1 of [RFC7530]",
+        "correct_text": "Section 6.4.1.1.9 of [RFC753A]",
+        "notes": "Correct where the item points to",
+        "submit_date": "2007-07-19",
+        "submitter_name": "Test Spec",
+        "verifier_id": 1,
+        "verifier_name": "Test Spec",
+        "update_date": "2008-11-13 10:13:51",
+        "status_tag": "Verified",
+        "section2": "1"
+    },
+    {
+        "errata_id": 2,
+        "doc-id": "RFC8275",
+        "errata_status_code": "Verified",
+        "errata_status_code": "Editorial",
+        "section": "1",
+        "orig_text": "Section 4.4 of [SUSv4]",
+        "correct_text": "Section 55.4 of [SUSv4]",
+        "notes": "Correct where the item points to",
+        "submit_date": "2007-07-19",
+        "submitter_name": "Test Spec",
+        "verifier_id": 1,
+        "verifier_name": "Test Spec",
+        "update_date": "2008-11-13 10:13:51",
+        "status_tag": "Verified",
+        "section2": "1"
+    }
+]

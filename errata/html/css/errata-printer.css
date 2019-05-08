@@ -1,0 +1,43 @@
+<style type="text/css">
+    .Verified-headnote-styling, .Verified-endnote-styling  {
+        font-wieght: bold;
+    }
+    .Verified-inline-styling {
+        font-wieght: bold;
+        background-color: lightGrey;
+    }
+
+    .Held-headnote-styling, .Held-endnote-styling {
+        font-style: italic;
+    }
+
+    .Held-inline-styling {
+        font-style: italic;
+        background-color: lightGrey;
+    }
+
+    .Reported-headnote-styling, .Reported-endnote-styling {
+        background-color: Beige;
+    }
+    
+    .Reported-inline-styling {
+        color: Yellow;
+    }
+
+    .Rejected-headnote-styling, .Rejected-endnote-styling {
+        background-color: LightPink;
+    }
+
+    .Rejected-inline-styling {
+        color: red;
+    }
+
+    .nodeCloseClass {
+        display:inline;
+    }
+
+    .nodeOpenClass {
+        display:inline;
+    }
+    
+</style>

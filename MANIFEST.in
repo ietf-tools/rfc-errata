@@ -1,0 +1,20 @@
+include changelog
+include LICENSE
+include README.rst
+include requirements.txt
+include errata/run.py
+include errata/__init__.py
+include errata/apply_errata.py
+include errata/checker.py
+include errata/utils.py
+include errata/Template/endnoteTemplate.txt
+include errata/Template/headnoteTemplate.txt
+include errata/Template/htmlTemplate.txt
+include errata/Template/sectionNoteTemplate.txt
+include errata/css/errata-base.css
+include errata/css/errata-color.css
+include errata/css/errata-monochrome.css
+include errata/css/errata-printer.css
+include errata/css/errata.js
+
+

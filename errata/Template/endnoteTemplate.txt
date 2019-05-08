@@ -1,0 +1,18 @@
+<div class='$status_tag-endnote-styling' id='eid$errata_id'>
+<pre>
+<b><i>$errata_status_code <a href='https://www.rfc-editor.org/errata/eid$errata_id'>Errata $errata_id</a> updates this document as follows:</i></b>
+
+<b>Section:</b> $section
+
+<b>Original Text:</b>
+
+$orig_text
+
+<b>Corrected Text:</b>
+
+$correct_text
+</pre>
+<b>Notes:</b><br/>
+$notes
+<br/>
+</div>
