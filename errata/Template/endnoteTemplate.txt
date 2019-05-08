@@ -16,4 +16,3 @@ $correct_text
 $notes
 <br/>
 </div>
-

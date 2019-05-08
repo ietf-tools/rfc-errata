@@ -138,7 +138,7 @@ class checker(object):
 
             if x.EndnoteCount + x.SectionCount > 0 and self.options.verbose:
                 print("{0}    {1}   {2}   {3}".format(rfc, x.InlineCount, x.SectionCount,
-                                                  x.EndnoteCount))
+                                                      x.EndnoteCount))
                 if rfc not in Reported:
                     for item in x.toApply:
                         if not item["section2"] in IgnoreSections:

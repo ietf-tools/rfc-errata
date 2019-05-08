@@ -12,9 +12,6 @@ $orig_text
 
 $correct_text
 </pre>
-<br/>
-<b>Notes:</b><br/><br/>
+<b>Notes:</b><br/>
 $notes
-<br/>
 </div>
-
