@@ -40,6 +40,9 @@ def main2():
     item_options.add_option("--text", help="Directory to store text versions in")
     item_options.add_option("--html", help="Directory to store html versions in")
     item_options.add_option("--css", help="Directory containing CSS and JavaScript files")
+    item_options.add_option("--copyto", action="append",
+                            help="Specify a destination to copy the html file, may occur multiple times")
+    item_options.add_option("--nocopy", action='store_true', help="Don't copy html files anywhere")
     optionparser.add_option_group(item_options)
 
     item_options = optparse.OptionGroup(optionparser, "Document Options")
@@ -154,6 +157,17 @@ def main2():
         else:
             print("Incorrect argument '{0}' given to rejected".format(options.rejected))
             exit(1)
+
+    if options.nocopy:
+        if options.copyto:
+            print("copyto and no copy options are mutually exclusive")
+            exit(1)
+        state.remove("dest")
+        updateState = True
+
+    if options.copyto:
+        state["dest"] = options.copyto
+        updateState = True
 
     check = checker(options, state)
 

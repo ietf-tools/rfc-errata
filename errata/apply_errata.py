@@ -288,6 +288,7 @@ class apply_errata(object):
             isStart, skipBlock = self.isSectionStart(self.source[i], i)
             if isStart:
                 self.currentSection = self.currentSection.lower().rstrip()
+                self.currentSection = html.unescape(self.currentSection)
                 self.allSections.append(self.currentSection)
                 self.sectionDict[self.currentSection] = self.source[self.startLine:i]
                 self.currentSection = isStart
@@ -300,6 +301,7 @@ class apply_errata(object):
                     i += 1
 
         self.currentSection = self.currentSection.lower().rstrip()
+        self.currentSection = html.unescape(self.currentSection)
         self.allSections.append(self.currentSection)
         self.sectionDict[self.currentSection] = self.source[self.startLine:i]
 
@@ -344,11 +346,12 @@ class apply_errata(object):
             return None
 
         newLines = []
+
         for line in lines:
             line = line.txt
             if len(line) > 0 and line[0] == '|':
                 line = line[1:]
-            match = re.match("\s*\^+\s*$", line)
+            match = re.match("[\s\^v]+$", line)
             if match:
                 line = None
             else:
@@ -364,7 +367,7 @@ class apply_errata(object):
                 line = line.txt
                 if len(line) > 0 and line[0] == '|':
                     line = line[1:]
-                match = re.match("\s*\^+\s*$", line)
+                match = re.match("[\s\^v]+$", line)
                 if match:
                     line = None
                 else:
@@ -390,8 +393,10 @@ class apply_errata(object):
             match = re.search(item[2], editedText)
             # print("pattern = {0}".format(item[2]))
             if match:
-                # M00BUG - Pick up corrrect_test2 here
-                newText = item[0]["orig_text"] if item[0]["status_tag"] == "Rejected" else item[0]["correct_text"]
+                if "orig_text2" in item[0]:
+                    newText = item[0]["orig_text2"] if item[0]["status_tag"] == "Rejected" else item[0]["correct_text2"]
+                else:
+                    newText = item[0]["orig_text"] if item[0]["status_tag"] == "Rejected" else item[0]["correct_text"]
                 editedText = editedText[:match.start()] +  \
                     self.inlineFormat.format(item[0]["status_tag"], item[0]["errata_id"], newText) + \
                     editedText[match.end():]
@@ -537,13 +542,17 @@ class apply_errata(object):
     def createSectionNotes(self):
         # M00BUG title continutations
 
-        ids = sorted([item["errata_id"] for item in self.toApply])
+        ids = sorted([item["errata_id"] for item in self.toApply], reverse=True)
         byId = dict((item["errata_id"], item) for item in self.toApply)
 
         for id in ids:
             item = byId[id]
             if not item["section2"] in self.allSections:
                 continue
+
+            if False:
+                x = item["orig_text"].splitlines()
+                print("{0}: {1}\n    {2}\n".format(item["errata_id"], x[0], x[1]))
 
             text = self.templates.sectionNote.substitute(item)
 
@@ -560,6 +569,11 @@ class apply_errata(object):
         ids = sorted(self.toApply, key=sortById)
 
         for item in ids:
+            if False:
+                x = item["orig_text"].splitlines()
+                if len(x) >= 2:
+                    print("{0}: {1}\n    {2}\n".format(item["errata_id"], x[0], x[1]))
+
             if "notes" in item and item["notes"]:
                 item["notes"] = item["notes"].replace("\n", "<br/>")
 

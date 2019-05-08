@@ -3,6 +3,7 @@ import re
 import os
 import time
 import datetime
+import shutil
 import email.utils as eut
 
 from http.client import HTTPSConnection, HTTPException
@@ -143,6 +144,13 @@ class checker(object):
                     for item in x.toApply:
                         if not item["section2"] in IgnoreSections:
                             print("        {0}  --> {1}".format(item["section"], item["section2"]))
+
+            if "dest" in self.state:
+                htmlFile = rfc + ".html"
+                htmlSource = os.path.join(self.state["html"], htmlFile)
+                for dest in self.state["dist"]:
+                    shutil.copyfile(htmlSource, os.path.join(dest, htmlFile))
+
         except Exception as e:
             with open("errors.log", "a") as f:
                 f.write(datetime.datetime.now().isoformat() + ": Error processing {0}.  {1}\n".format(rfc, e))

@@ -19,11 +19,7 @@
     <body>
         <div class='Verified-headnote-styling'>
 This document has been updated by the following 'Verified' errata:
- <a href='#btn_2'>Errata 2</a>
-</div>
-<div class='Reported-headnote-styling'>
-This document has been updated by the following 'Reported' errata:
- <a href='#btn_2'>Errata 1</a>
+ <a href='#eid1'>Errata 1</a>,  <a href='#eid2'>Errata 2</a>
 </div>
 
         <pre>
@@ -95,42 +91,8 @@ Table of Contents
    creation mask (umask).  The umask specifies which permissions must be
    turned off when creating new file system objects.
 
-   When applying the mode, Section 6.4.1.1 of <span class="Verified-inline-styling" id='inline-2'>[RFC7531] recommends</span id__locate=2> that <button id="btn_2" target="expand_2" onclick='hideFunction("expand_2")'>Expand Multiple</button>
-<div class="nodeCloseClass" id='expand_2'><div class='Verified-endnote-styling' id='eid2'>
-<pre>
-<b><i>Editorial <a href='https://www.rfc-editor.org/errata/eid2'>Errata 2</a> updates this document as follows:</i></b>
-
-<b>Section:</b> 1
-
-<b>Original Text:</b>
-
-[RFC7530] recommends
-
-<b>Corrected Text:</b>
-
-[RFC7531] recommends
-</pre>
-<b>Notes:</b><br/>
-Overlap with the other one
-</div>
-<div class='Reported-endnote-styling' id='eid1'>
-<pre>
-<b><i>Editorial <a href='https://www.rfc-editor.org/errata/eid1'>Errata 1</a> updates this document as follows:</i></b>
-
-<b>Section:</b> 1
-
-<b>Original Text:</b>
-
-Section 6.4.1.1 of [RFC7530]
-
-<b>Corrected Text:</b>
-
-Section 6.4.1.1.9 of [RFC753A]
-</pre>
-<b>Notes:</b><br/>
-Correct where the item points to
-</div>
-</div>   servers SHOULD restrict permissions granted to any user or group
+   When applying the mode, Section 6.4.1.1 of [RFC7530] recommends that
+   servers SHOULD restrict permissions granted to any user or group
    named in the Access Control List (ACL) to be no more than the
    permissions granted by the MODE4_RGRP, MODE4_WGRP, and MODE4_XGRP
    bits.  Servers aiming to provide clients with Unix-like chmod
@@ -174,6 +136,40 @@ Correct where the item points to
 
 3.  Protocol Extension Considerations But For a Title String which is
    going to have a two line title
+<div class='Verified-endnote-styling' id='eid1'>
+<pre>
+<b><i>Editorial <a href='https://www.rfc-editor.org/errata/eid1'>Errata 1</a> updates this document as follows:</i></b>
+
+<b>Section:</b> 3
+
+<b>Original Text:</b>
+
+Section 6.4.1.1 of [RFC7530]
+
+<b>Corrected Text:</b>
+
+Section 6.4.1.1.9 of [RFC753A]
+</pre>
+<b>Notes:</b><br/>
+Correct where the item points to
+</div>
+<div class='Verified-endnote-styling' id='eid2'>
+<pre>
+<b><i>Editorial <a href='https://www.rfc-editor.org/errata/eid2'>Errata 2</a> updates this document as follows:</i></b>
+
+<b>Section:</b> 3
+
+<b>Original Text:</b>
+
+Section 6.4.1.1 of [RFC7530]
+
+<b>Corrected Text:</b>
+
+Section 6.4.1.1.9 of [RFC753A]
+</pre>
+<b>Notes:</b><br/>
+Correct where the item points to
+</div>
 
    This document presents an extension to minor version 2 of the NFSv4
    protocol as described in [RFC8178].  It describes a new OPTIONAL

@@ -47,6 +47,8 @@ run either to update all RFCs that have errata or only a specific set of RFCs
     .                ``--rejected=``         apply 'rejected' errata (yes/no)
     .                ``--verified=``         apply 'verified' errata (yes/no)
     .                ``--force``             rebuild all HTML files rather than using timestamps
+    .                ``--nocopy``            clear destination copy list
+    .                ``--copyto``            specify the destinations to copy to (multiple)
     ``-v``           ``--verbose``           print extra information
     ``-V``           ``--version``           display the version number and exit
     ===============  ======================= ==================================================

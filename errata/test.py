@@ -341,6 +341,130 @@ class TestInline(unittest.TestCase):
         self.assertTrue(compare_file("./Temp/RFC8275.html", "./Results/inline-seven.html", True))
 
 
+class TestSectionNote(unittest.TestCase):
+    def test_one(self):
+        with open("Tests/section1.json") as f:
+            errata = json.load(f)
+        if not os.path.exists("Temp"):
+            os.mkdir("Temp")
+        state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
+        options = Values(defaults={'search': False})
+
+        doc = apply_errata(errata, options, state)
+
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
+
+        doc.apply(True, templates)
+
+        self.assertEqual(doc.InlineCount, 0)
+        self.assertEqual(doc.SectionCount, 1)
+        self.assertEqual(doc.EndnoteCount, 0)
+
+        self.assertTrue(compare_file("./Temp/RFC8275.html", "./Results/section1.html", True))
+
+    def test_two(self):
+        with open("Tests/section2.json") as f:
+            errata = json.load(f)
+        if not os.path.exists("Temp"):
+            os.mkdir("Temp")
+        state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
+        options = Values(defaults={'search': False})
+
+        doc = apply_errata(errata, options, state)
+
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
+
+        doc.apply(True, templates)
+
+        self.assertEqual(doc.InlineCount, 0)
+        self.assertEqual(doc.SectionCount, 1)
+        self.assertEqual(doc.EndnoteCount, 0)
+
+        self.assertTrue(compare_file("./Temp/RFC8275.html", "./Results/section2.html", True))
+
+    def test_three(self):
+        with open("Tests/section3.json") as f:
+            errata = json.load(f)
+        if not os.path.exists("Temp"):
+            os.mkdir("Temp")
+        state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
+        options = Values(defaults={'search': False})
+
+        doc = apply_errata(errata, options, state)
+
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
+
+        doc.apply(True, templates)
+
+        self.assertEqual(doc.InlineCount, 0)
+        self.assertEqual(doc.SectionCount, 2)
+        self.assertEqual(doc.EndnoteCount, 0)
+
+        self.assertTrue(compare_file("./Temp/RFC8275.html", "./Results/section3.html", True))
+
+    def test_four(self):
+        with open("Tests/section4.json") as f:
+            errata = json.load(f)
+        if not os.path.exists("Temp"):
+            os.mkdir("Temp")
+        state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
+        options = Values(defaults={'search': False})
+
+        doc = apply_errata(errata, options, state)
+
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
+
+        doc.apply(True, templates)
+
+        self.assertEqual(doc.InlineCount, 0)
+        self.assertEqual(doc.SectionCount, 2)
+        self.assertEqual(doc.EndnoteCount, 0)
+
+        self.assertTrue(compare_file("./Temp/RFC8275.html", "./Results/section4.html", True))
+
+
+class TestSearch(unittest.TestCase):
+    def test_one(self):
+        with open("Tests/search1.json") as f:
+            errata = json.load(f)
+        if not os.path.exists("Temp"):
+            os.mkdir("Temp")
+        state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
+        options = Values(defaults={'search': True})
+
+        doc = apply_errata(errata, options, state)
+
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
+
+        doc.apply(True, templates)
+
+        self.assertEqual(doc.InlineCount, 1)
+        self.assertEqual(doc.SectionCount, 0)
+        self.assertEqual(doc.EndnoteCount, 0)
+
+        self.assertTrue(compare_file("./Temp/RFC8275.html", "./Results/search1.html", True))
+
+    def test_two(self):
+        with open("Tests/search2.json") as f:
+            errata = json.load(f)
+        if not os.path.exists("Temp"):
+            os.mkdir("Temp")
+        state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
+        options = Values(defaults={'search': True})
+
+        doc = apply_errata(errata, options, state)
+
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
+
+        doc.apply(True, templates)
+
+        self.assertEqual(doc.InlineCount, 1)
+        self.assertEqual(doc.SectionCount, 0)
+        self.assertEqual(doc.EndnoteCount, 0)
+
+        self.assertTrue(compare_file("./Temp/RFC8275.html", "./Results/search2.html", True))
+
+
 def compare_file2(errFile, stderr, displayError):
     with open(stderr, 'rb') as f:
         stderr = f.read()
