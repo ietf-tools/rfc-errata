@@ -148,7 +148,7 @@ class checker(object):
             if "dest" in self.state:
                 htmlFile = rfc + ".html"
                 htmlSource = os.path.join(self.state["html"], htmlFile)
-                for dest in self.state["dist"]:
+                for dest in self.state["dest"]:
                     shutil.copyfile(htmlSource, os.path.join(dest, htmlFile))
 
         except Exception as e:
