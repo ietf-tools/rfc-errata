@@ -43,6 +43,8 @@ def fixSection(sectionIn):
     # spelling error
     section = section.replace("Apendix", "Appendix")
     section = section.replace("App. ", "Appendix ")
+    if section == "TOC":
+        section = "table of contents"
 
     # trailing period
     if len(section) > 1 and section[-1] == '.':
@@ -145,7 +147,7 @@ class checker(object):
                         if not item["section2"] in IgnoreSections:
                             print("        {0}  --> {1}".format(item["section"], item["section2"]))
 
-            if "dest" in self.state and (self.inline > 0 or self.sectionCount > 0 or self.endnoteCount > 0):
+            if "dest" in self.state and (x.InlineCount > 0 or x.SectionCount > 0 or x.EndnoteCount > 0):
                 htmlFile = rfc + ".html"
                 htmlSource = os.path.join(self.state["html"], htmlFile)
                 for dest in self.state["dest"]:
@@ -169,11 +171,11 @@ class checker(object):
             allLines = self.inlineCount + self.sectionCount + self.endnoteCount
             if allLines == 0:
                 allLines = 1
-            print("Inline  = {0:4}     {1:2.2f}     4078".format(self.inlineCount,
+            print("Inline  = {0:4}     {1:2.2f}     4082".format(self.inlineCount,
                                                                  self.inlineCount/allLines*100))
-            print("Section = {0:4}     {1:2.2f}     1002".format(self.sectionCount,
+            print("Section = {0:4}     {1:2.2f}      999".format(self.sectionCount,
                                                                  self.sectionCount/allLines*100))
-            print("End     = {0:4}     {1:2.2f}      415".format(self.endnoteCount,
+            print("End     = {0:4}     {1:2.2f}      414".format(self.endnoteCount,
                                                                  self.endnoteCount/allLines*100))
             print("Total   = {0:4}".format(allLines))
 
