@@ -113,7 +113,7 @@ class apply_errata(object):
             with open(fileName, "r", encoding='utf-8') as f:
                 text = f.read()
         except UnicodeDecodeError:
-            with open(fileName, "r") as f:
+            with open(fileName, "r", encoding='iso-8859-1') as f:
                 text = f.read()
 
         # Do the the first set of simple changes
@@ -377,6 +377,15 @@ class apply_errata(object):
 
         if oldText == oldTextIn:
             return None
+
+        if "..." in newText:
+            m = re.match("\s*\[?\.\.\.\]?", newText)
+            if m:
+                newTextI = newText[m.end():]
+            m = re.search("\[?\.\.\.\]?\s*$", newText)
+            if m:
+                newText = newText[:m.start()]
+
         item["orig_text2"] = oldText
         item["correct_text2"] = newText
         return self.buildPattern(oldText)
