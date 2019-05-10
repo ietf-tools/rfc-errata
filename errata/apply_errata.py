@@ -378,7 +378,7 @@ class apply_errata(object):
         if oldText == oldTextIn:
             return None
 
-        if "..." in newText:
+        if newText and "..." in newText:
             m = re.match("\s*\[?\.\.\.\]?", newText)
             if m:
                 newTextI = newText[m.end():]
