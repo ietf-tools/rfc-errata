@@ -145,10 +145,10 @@ class checker(object):
                         if not item["section2"] in IgnoreSections:
                             print("        {0}  --> {1}".format(item["section"], item["section2"]))
 
-            if "dest" in self.state:
+            if "dest" in self.state and (self.inline > 0 or self.sectionCount > 0 or self.endnoteCount > 0):
                 htmlFile = rfc + ".html"
                 htmlSource = os.path.join(self.state["html"], htmlFile)
-                for dest in self.state["dist"]:
+                for dest in self.state["dest"]:
                     shutil.copyfile(htmlSource, os.path.join(dest, htmlFile))
 
         except Exception as e:

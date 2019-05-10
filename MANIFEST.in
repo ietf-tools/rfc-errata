@@ -10,6 +10,7 @@ include errata/utils.py
 include errata/Template/endnoteTemplate.txt
 include errata/Template/headnoteTemplate.txt
 include errata/Template/htmlTemplate.txt
+include errata/Template/inlineNoteTemplate.txt
 include errata/Template/sectionNoteTemplate.txt
 include errata/css/errata-base.css
 include errata/css/errata-color.css
