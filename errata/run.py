@@ -79,9 +79,9 @@ def main2():
             "serverName": "www.rfc-editor.org",
             "lastCheck": "Sun, 21 Apr 2019 00:00:00 GMT",
             "which": ["Verified", "Held"],
-            "text": ".\\rfc",
-            "html": ".\\html",
-            "ossPath": ".\\css"
+            "text": "./rfc",
+            "html": "./html",
+            "ossPath": "./css"
         }
 
     updateState = False
