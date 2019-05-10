@@ -381,7 +381,7 @@ class apply_errata(object):
         if newText and "..." in newText:
             m = re.match("\s*\[?\.\.\.\]?", newText)
             if m:
-                newTextI = newText[m.end():]
+                newText = newText[m.end():]
             m = re.search("\[?\.\.\.\]?\s*$", newText)
             if m:
                 newText = newText[:m.start()]
