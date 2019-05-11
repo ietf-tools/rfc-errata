@@ -71,6 +71,7 @@ class checker(object):
         self.inlineCount = 0
         self.sectionCount = 0
         self.endnoteCount = 0
+        self.connection = None
 
     # --- Download JSON file with errata data -------------------------
 
@@ -122,15 +123,15 @@ class checker(object):
             txt_file = os.path.join(self.state["text"], "{0}.txt".format(rfc))
 
             if not os.path.isfile(txt_file):
-                connection = HTTPSConnection(self.state["serverName"])
+                if not self.connection:
+                    self.connection = HTTPSConnection(self.state["serverName"])
 
                 # print("RFC = {0}".format(rfc))
                 rfcNum = int(rfc[3:])
-                connection.request('GET', '/rfc/rfc{0}.txt'.format(rfcNum).lower())
-                res = connection.getresponse()
+                self.connection.request('GET', '/rfc/rfc{0}.txt'.format(rfcNum).lower())
+                res = self.connection.getresponse()
                 with open(txt_file, "wb") as f:
                     f.write(res.read())
-                connection.close()
 
             x = apply_errata(self.byRfc[rfc], self.options, self.state)
             x.apply(force, templates)
@@ -153,7 +154,18 @@ class checker(object):
                 for dest in self.state["dest"]:
                     shutil.copyfile(htmlSource, os.path.join(dest, htmlFile))
 
+        except HTTPException as e:
+            if self.connection:
+                self.connection.close()
+                self.connection = None
+            if self.options.verbose:
+                print("Error processing {0}. {1}\n".format(rfc, e))
+            with open("errors.log", "a") as f:
+                f.write(datetime.datetime.now().isoformat() + ": Error processing {0}.  {1}\n".format(rfc, e))
+
         except Exception as e:
+            if self.options.verbose:
+                print("Error processing {0}. {1}\n".format(rfc, e))
             with open("errors.log", "a") as f:
                 f.write(datetime.datetime.now().isoformat() + ": Error processing {0}.  {1}\n".format(rfc, e))
 
@@ -182,23 +194,28 @@ class checker(object):
     def downloadErrataFile(self):
         try:
             connection = HTTPSConnection(self.state["serverName"])
-            connection.request('HEAD', '/errata.json')
-            res = connection.getresponse()
-            if res.status != 200:
-                print("Error {0} for 'HEAD /errata.json' on '{1}'".format(res.status,
-                                                                          self.state["serverName"]))
-                exit(1)
-            res.read()
+            if os.path.exists("errata.json"):
+                connection.request('HEAD', '/errata.json')
+                res = connection.getresponse()
+                if res.status != 200:
+                    print("Error {0} for 'HEAD /errata.json' on '{1}'".format(res.status,
+                                                                              self.state["serverName"]))
+                    exit(1)
+                    res.read()
 
-            lastModified = eut.parsedate_to_datetime(res.getheader("Last-Modified",
-                                                                   "Mon, 22 Apr 2019 00:00:00 GMT"))
-            if lastModified <= eut.parsedate_to_datetime(self.state["lastCheck"]):
-                self.state["lastCheck"] = res.getheader("Last-Modified")
-                return False
+                lastModified = eut.parsedate_to_datetime(res.getheader("Last-Modified",
+                                                                       "Mon, 22 Apr 2019 00:00:00 GMT"))
+                if lastModified <= eut.parsedate_to_datetime(self.state["lastCheck"]):
+                    if self.options.verbose:
+                        print("errata.json is up to date.")
+                        self.state["lastCheck"] = res.getheader("Last-Modified")
+                    return False
 
-            connection.close()
+            # connection.close()
             #  Should not eed to do this, but it doesn't work otherwise
-            connection = HTTPSConnection(self.state["serverName"])
+            # connection = HTTPSConnection(self.state["serverName"])
+            if self.options.verbose:
+                print("downloading new copy of errata.json")
 
             connection.request('GET', '/errata.json')
             time.sleep(10)
@@ -219,6 +236,9 @@ class checker(object):
 
             self.state["lastCheck"] = res.getheader("Last-Modified")
         except HTTPException as e:
-            print("Error '{1}' reaching the website '{0}'".format(self.state["serverName"], e))
+            if self.options.verbose:
+                print("Error '{1}' reaching the website '{0}'".format(self.state["serverName"], e))
+            with open("errors.log", "a") as f:
+                f.write(datetime.datetime.now().isoformat() + ": Error download errata.json.  site = {1}\n{0}\n".format(e, self.state["serverName"]))
             exit(1)
         return True
