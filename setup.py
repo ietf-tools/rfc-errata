@@ -66,13 +66,13 @@ Changelog
 
 long_description = long_description.replace('\r', '')
 
-import errata
+import Rfc_Errata
 
 setup(
     name='rfc-errata',
 
     # Versions should comply with PEP440.
-    version=errata.__version__,
+    version=Rfc_Errata.__version__,
 
     description="Build html files from the text RFCs and the errata database.",
     long_description=long_description,
@@ -113,13 +113,13 @@ setup(
     # ]
 
     package_data={
-       'errata': ['templates/*', 'css/*']
+       'Rfc_Errata': ['templates/*', 'css/*']
        },
     include_package_data = True,
 
     entry_points={
         'console_scripts': [
-            'rfc-errata=errata.run:main'
+            'rfc-errata=Rfc_Errata.run:main'
             ]
         },
     zip_safe=False

@@ -7,9 +7,9 @@ import sys
 import subprocess
 import difflib
 import json
-from errata.template import Templates
+from Rfc_Errata.template import Templates
 
-from errata.apply_errata import apply_errata
+from Rfc_Errata.apply_errata import apply_errata
 from optparse import Values
 
 test_program = "rfc-errata"

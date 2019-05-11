@@ -2,20 +2,20 @@ include changelog
 include LICENSE
 include README.rst
 include requirements.txt
-include errata/run.py
-include errata/__init__.py
-include errata/apply_errata.py
-include errata/checker.py
-include errata/utils.py
-include errata/Template/endnoteTemplate.txt
-include errata/Template/headnoteTemplate.txt
-include errata/Template/htmlTemplate.txt
-include errata/Template/inlineNoteTemplate.txt
-include errata/Template/sectionNoteTemplate.txt
-include errata/css/errata-base.css
-include errata/css/errata-color.css
-include errata/css/errata-monochrome.css
-include errata/css/errata-printer.css
-include errata/css/errata.js
+include Rfc_Errata/run.py
+include Rfc_Errata/__init__.py
+include Rfc_Errata/apply_errata.py
+include Rfc_Errata/checker.py
+include Rfc_Errata/utils.py
+include Rfc_Errata/Template/endnoteTemplate.txt
+include Rfc_Errata/Template/headnoteTemplate.txt
+include Rfc_Errata/Template/htmlTemplate.txt
+include Rfc_Errata/Template/inlineNoteTemplate.txt
+include Rfc_Errata/Template/sectionNoteTemplate.txt
+include Rfc_Errata/css/errata-base.css
+include Rfc_Errata/css/errata-color.css
+include Rfc_Errata/css/errata-monochrome.css
+include Rfc_Errata/css/errata-printer.css
+include Rfc_Errata/css/errata.js
 
 

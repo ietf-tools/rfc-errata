@@ -7,7 +7,7 @@ import shutil
 import email.utils as eut
 
 from http.client import HTTPSConnection, HTTPException
-from errata.apply_errata import apply_errata
+from Rfc_Errata.apply_errata import apply_errata
 
 
 def fixSection(sectionIn):
