@@ -1,7 +1,6 @@
 import json
 import re
 import os
-import time
 import datetime
 import shutil
 import email.utils as eut
