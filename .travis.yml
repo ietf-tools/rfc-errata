@@ -30,4 +30,4 @@ script:
   - $PYTHON --version
   - $PYTHON setup.py --quiet install
   - pwd
-  - cd errata && $PYTHON test.py
+  - cd Rfc_Errata && $PYTHON test.py

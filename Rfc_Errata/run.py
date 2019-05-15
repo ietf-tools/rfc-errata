@@ -2,10 +2,10 @@ import json
 import sys
 import os
 import optparse
-from errata.checker import checker
+from Rfc_Errata.checker import checker
 # from rfc2html import markup
-from errata.template import Templates
-from errata.__init__ import __version__
+from Rfc_Errata.template import Templates
+from Rfc_Errata.__init__ import __version__
 
 
 def display_version(self, opt, value, parser):
