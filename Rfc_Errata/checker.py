@@ -119,19 +119,39 @@ class checker(object):
         if rfc not in self.byRfc:
             print("{0} does not have any current errata".format(rfc))
             return
+
         try:
             txt_file = os.path.join(self.state["text"], "{0}.txt".format(rfc))
 
             if not os.path.isfile(txt_file):
-                if not self.connection:
-                    self.connection = HTTPSConnection(self.state["serverName"])
+                retries = 3
+                while retries:
+                    try:
+                        if not self.connection:
+                            self.connection = HTTPSConnection(self.state["serverName"])
 
-                # print("RFC = {0}".format(rfc))
-                rfcNum = int(rfc[3:])
-                self.connection.request('GET', '/rfc/rfc{0}.txt'.format(rfcNum).lower())
-                res = self.connection.getresponse()
-                with open(txt_file, "wb") as f:
-                    f.write(res.read())
+                        # print("RFC = {0}".format(rfc))
+                        rfcNum = int(rfc[3:])
+                        self.connection.request('GET', '/rfc/rfc{0}.txt'.format(rfcNum).lower())
+                        res = self.connection.getresponse()
+                        with open(txt_file, "wb") as f:
+                            f.write(res.read())
+                        retries = 0
+                    except HTTPException as e:
+                        if retries:
+                            if self.options.verbose:
+                                print("Close and reopen connection because '{0}'".format(e))
+
+                            self.connection.close()
+                            self.connection = None
+                            retries -= 1
+                        else:
+                            errText = "Error '{1}' downloading 'errata.json' from '{0}'".format(self.state["serverName"], e)
+                            if self.options.verbose:
+                                print(errText)
+                            with open("errors.log", "a") as f:
+                                f.write(datetime.datetime.now().isoformat() + ": " + errText)
+                            return
 
             x = apply_errata(self.byRfc[rfc], self.options, self.state)
             x.apply(force, templates)
@@ -153,15 +173,6 @@ class checker(object):
                 htmlSource = os.path.join(self.state["html"], htmlFile)
                 for dest in self.state["dest"]:
                     shutil.copyfile(htmlSource, os.path.join(dest, htmlFile))
-
-        except HTTPException as e:
-            if self.connection:
-                self.connection.close()
-                self.connection = None
-            if self.options.verbose:
-                print("Error processing {0}. {1}\n".format(rfc, e))
-            with open("errors.log", "a") as f:
-                f.write(datetime.datetime.now().isoformat() + ": Error processing {0}.  {1}\n".format(rfc, e))
 
         except Exception as e:
             if self.options.verbose:
@@ -193,15 +204,16 @@ class checker(object):
 
     def downloadErrataFile(self):
         try:
-            connection = HTTPSConnection(self.state["serverName"])
+            self.connection = HTTPSConnection(self.state["serverName"])
+            lastModified = None
             if os.path.exists("errata.json"):
-                connection.request('HEAD', '/errata.json')
-                res = connection.getresponse()
+                self.connection.request('HEAD', '/errata.json')
+                res = self.connection.getresponse()
                 if res.status != 200:
                     print("Error {0} for 'HEAD /errata.json' on '{1}'".format(res.status,
                                                                               self.state["serverName"]))
                     exit(1)
-                    res.read()
+                res.read()
 
                 lastModified = eut.parsedate_to_datetime(res.getheader("Last-Modified",
                                                                        "Mon, 22 Apr 2019 00:00:00 GMT"))
@@ -211,34 +223,66 @@ class checker(object):
                         self.state["lastCheck"] = res.getheader("Last-Modified")
                     return False
 
-            # connection.close()
             #  Should not eed to do this, but it doesn't work otherwise
-            # connection = HTTPSConnection(self.state["serverName"])
             if self.options.verbose:
                 print("downloading new copy of errata.json")
+                if lastModified:
+                    print("Old: {0}\nNew:{1}".format(self.state["lastCheck"], lastModified))
 
-            connection.request('GET', '/errata.json')
-            time.sleep(10)
-            res = connection.getresponse()
-            if res.status != 200:
-                print("Error {0} for 'HEAD /errata.json' on '{1}'".format(res.status,
-                                                                          self.state["serverName"]))
-                exit(1)
-            with open("errata.json", "w") as f:
-                f.write(res.read().decode('utf-8').replace("\\r\\n", "\\n"))
+            retries = 2
+            while retries:
+                try:
+                    if self.connection is None:
+                        self.connection = HTTPSConnection(self.state["serverName"])
+                    self.connection.request('GET', '/errata.json')
+                    res = self.connection.getresponse()
+                    if res.status != 200:
+                        errText = "Error {0} for 'HEAD /errata.json' on '{1}'".format(res.status,
+                                                                                      self.state["serverName"])
+                        print(errText)
+                        with open("errors.log", "a") as f:
+                            f.write(datetime.datetime.now().isoformat() + ": " + errText)
+                        exit(1)
+                    with open("errata.json", "w") as f:
+                        f.write(res.read().decode('utf-8').replace("\\r\\n", "\\n"))
 
-            if True:
-                with open("errata.json") as f:
-                    data = json.load(f)
+                    if True:
+                        with open("errata.json") as f:
+                            data = json.load(f)
 
-                with open("errata.json", "w") as f:
-                    json.dump(data, f, indent=2)
+                        with open("errata.json", "w") as f:
+                            json.dump(data, f, indent=2)
 
-            self.state["lastCheck"] = res.getheader("Last-Modified")
+                    retries = 0
+                    self.state["lastCheck"] = res.getheader("Last-Modified")
+                except HTTPException as e:
+                    if retries:
+                        if self.options.verbose:
+                            print("Close and reopen connection because '{0}'".format(e))
+
+                        self.connection.close()
+                        self.connection = None
+                        retries -= 1
+                    else:
+                        errText = "Error '{1}' downloading 'errata.json' from '{0}'".format(self.state["serverName"], e)
+                        if self.options.verbose:
+                            print(errText)
+                        with open("errors.log", "a") as f:
+                            f.write(datetime.datetime.now().isoformat() + ": " + errText)
+                        exit(1)
+                except Exception as e:
+                    errText = "Error '{1}' downloading 'errata.json' from '{0}'".format(self.state["serverName"], e)
+                    if self.options.verbose:
+                        print(errText)
+                    with open("errors.log", "a") as f:
+                        f.write(datetime.datetime.now().isoformat() + ": " + errText)
+                    exit(1)
+
         except HTTPException as e:
+            errText = "Error '{1}' downloading 'errata.json' from '{0}'".format(self.state["serverName"], e)
             if self.options.verbose:
-                print("Error '{1}' reaching the website '{0}'".format(self.state["serverName"], e))
+                print(errText)
             with open("errors.log", "a") as f:
-                f.write(datetime.datetime.now().isoformat() + ": Error download errata.json.  site = {1}\n{0}\n".format(e, self.state["serverName"]))
+                f.write(datetime.datetime.now().isoformat() + ": " + errText)
             exit(1)
         return True
