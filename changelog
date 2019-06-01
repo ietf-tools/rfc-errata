@@ -1,3 +1,16 @@
+rfc-errata (0.1.4) distribution(s); urgency=low
+
+	* The text taken from the errata file input needs to be HTML quoted as well as the RFC
+	* Make the single rfc command line parsing nicer
+
+-- Jim Schaad <ietf@augustcellars.com>  Fri 31 May 2019 12:00:00 -0800
+
+rfc-errata (0.1.3) distribution(s); urgency=low
+
+	* Add better retry logic on HTTPS session failures.
+
+-- Jim Schaad <ietf@augustcellars.com>  Fri 17 May 2019 12:00:00 -0800
+
 rfc-errata (0.1.2) distribution(s); urgency=low
 
 	* Rename directory to closer match the app name

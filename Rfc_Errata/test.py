@@ -465,6 +465,28 @@ class TestSearch(unittest.TestCase):
         self.assertTrue(compare_file("./Temp/RFC8275.html", "./Results/search2.html", True))
 
 
+class TestHtmlQuoting(unittest.TestCase):
+    def test_errata(self):
+        with open("Tests/quote1.json", encoding='utf-8') as f:
+            errata = json.load(f)
+        if not os.path.exists("Temp"):
+            os.mkdir("Temp")
+        state = {"text": "./Tests", "html": "./Temp", "ossPath": "css"}
+        options = Values(defaults={'search': False})
+
+        doc = apply_errata(errata, options, state)
+
+        templates = Templates(os.path.join(os.path.dirname(__file__), "Template"))
+
+        doc.apply(True, templates)
+
+        self.assertEqual(doc.InlineCount, 0)
+        self.assertEqual(doc.SectionCount, 1)
+        self.assertEqual(doc.EndnoteCount, 0)
+
+        self.assertTrue(compare_file("./Temp/RFC8275.html", "./Results/quote1.html", True))
+
+
 def compare_file2(errFile, stderr, displayError):
     with open(stderr, 'rb') as f:
         stderr = f.read()

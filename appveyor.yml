@@ -1,0 +1,30 @@
+environment:
+  EXECUTABLE: python.exe
+  VENV: NO
+  PIP_DIR: Scripts
+  matrix:
+    # For the versions of python available and we are using
+    
+    - PYTHON: "C:\\Python35-x64"
+    - PYTHON: "C:\\Python36-x64"
+    - PYTHON: "C:\\Python37"
+    - PYTHON: "C:\\Python37-x64"
+
+install:
+  - ps: |
+        if ($env:PYTHON -eq "c:/vp/pypy2")
+        {
+            c:\Projects\RfcEditor\winbuild\appveyor_install_pypy.cmd
+        }
+  - "%PYTHON%\\%EXECUTABLE% -m pip install -r requirements.txt"
+  - "%PYTHON%\\%EXECUTABLE% -m pip install pycodestyle"
+  - "%PYTHON%\\%EXECUTABLE% -m pip install pyflakes"
+
+build: off
+
+test_script:
+  - set PATH=%PYTHON%\Scripts;%PATH%;
+  - dir
+  - "%PYTHON%\\%EXECUTABLE% setup.py --quiet install"
+  - cd Rfc_Errata
+  - "%PYTHON%\\%EXECUTABLE% test.py"
