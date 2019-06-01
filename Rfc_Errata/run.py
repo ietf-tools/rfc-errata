@@ -192,6 +192,13 @@ def main2():
         check.processAllRfcs(templates)
     else:
         for rfc in args:
+            rfc = rfc.upper()
+            if not rfc.startswith("RFC"):
+                if rfc.isdigit():
+                    rfc = "RFC" + rfc
+                else:
+                    print("Only RFCs can be provided for update.  Use RFCXXXX")
+
             check.processRFC(rfc, options.force, templates)
             # if False:
             #    with open('rfc/' + rfc + '.txt') as f:

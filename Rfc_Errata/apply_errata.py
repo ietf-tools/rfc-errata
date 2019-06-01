@@ -406,6 +406,7 @@ class apply_errata(object):
                     newText = item[0]["orig_text2"] if item[0]["status_tag"] == "Rejected" else item[0]["correct_text2"]
                 else:
                     newText = item[0]["orig_text"] if item[0]["status_tag"] == "Rejected" else item[0]["correct_text"]
+                newText = html.escape(newText)
                 editedText = editedText[:match.start()] +  \
                     self.inlineFormat.format(item[0]["status_tag"], item[0]["errata_id"], newText) + \
                     editedText[match.end():]
@@ -428,7 +429,7 @@ class apply_errata(object):
                         m = endTag.search(sectionLines[line])
                         if m:
                             sectionLines.insert(line+1, self.inlineExpandWrapper.format(item[0]["errata_id"],
-                                                                                        self.templates.inlineNote.substitute(item[0])))
+                                                                                        self.substitute(self.templates.inlineNote, item[0])))
                             break
 
         button = re.compile("Expand</button")
@@ -448,7 +449,7 @@ class apply_errata(object):
                             print("Internal Error")
                             break
                         sectionLines[line] = sectionLines[line][:-6] + \
-                            self.templates.inlineNote.substitute(item[0]) + "</div>"
+                            self.substitute(self.templates.inlineNote, item[0]) + "</div>"
                         break
                     m = button.search(sectionLines[line])
                     if m:
@@ -563,7 +564,7 @@ class apply_errata(object):
                 x = item["orig_text"].splitlines()
                 print("{0}: {1}\n    {2}\n".format(item["errata_id"], x[0], x[1]))
 
-            text = self.templates.sectionNote.substitute(item)
+            text = self.substitute(self.templates.sectionNote, item)
 
             section = self.sectionDict[item["section2"]]
             section = section[:2] + [text] + section[2:]
@@ -586,7 +587,7 @@ class apply_errata(object):
             if "notes" in item and item["notes"]:
                 item["notes"] = item["notes"].replace("\n", "<br/>")
 
-            errataFooter += self.templates.endNote.substitute(item)
+            errataFooter += self.substitute(self.templates.endNote, item)
             self.EndnoteCount += 1
 
         self.errataFooter = errataFooter
@@ -612,6 +613,15 @@ class apply_errata(object):
                 errataHeader[keys]["errata_list"] = errataHeader[keys]["errata_list"][:-2]
                 header += self.templates.headNote.substitute(errataHeader[keys])
         self.header = header
+
+    def substitute(self, template, fields):
+        fields2 = {}
+        for k in fields:
+            if isinstance(fields[k], str):
+                fields2[k] = html.escape(fields[k])
+            else:
+                fields2[k] = fields[k]
+        return template.substitute(fields2)
 
     def emitHtml(self):
 
