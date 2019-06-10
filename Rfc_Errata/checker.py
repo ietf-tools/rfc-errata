@@ -110,8 +110,6 @@ class checker(object):
                 byRfc[item["doc-id"]] = []
 
             byRfc[item["doc-id"]].append(item)
-            if "notes" in item and item["notes"]:
-                item["notes"] = item["notes"].replace("\n", "<br/>")
         self.byRfc = byRfc
 
     def processRFC(self, rfc, force, templates):
