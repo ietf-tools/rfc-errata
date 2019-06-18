@@ -1,3 +1,10 @@
+rfc-errata (0.1.5) distribution(s); urgency=low
+
+	* RFC Editor requested some changes in how the templates are worded
+	* Fixed corner case where an entire section can disappear
+
+-- Jim Schaad <ietf@augustcellars.com>  Tue 18 June 2019 12:00:00 -0800
+
 rfc-errata (0.1.4) distribution(s); urgency=low
 
 	* The text taken from the errata file input needs to be HTML quoted as well as the RFC
