@@ -4,7 +4,6 @@
 from __future__ import print_function, unicode_literals, division
 
 import re
-import textwrap
 from collections import namedtuple
 
 try:
@@ -18,31 +17,6 @@ except ImportError:
     pass
 
 Line = namedtuple('Line', ['num', 'txt'])
-
-
-class Options(object):
-    def __init__(self, **kwargs):
-        for k, v in kwargs.items():
-            if not k.startswith('__'):
-                setattr(self, k, v)
-    pass
-
-
-def wrap(s, w=120):
-    termsize = get_terminal_size() if get_terminal_size else (80, 24)
-    cols = min(w, max(termsize[0], 60))
-
-    lines = s.split('\n')
-    wrapped = []
-    # Preserve any indentation (after the general indentation)
-    for line in lines:
-        prev_indent = '   '
-        indent_match = re.search('^(\W+)', line)
-        # Change the existing wrap indentation to the original one
-        if (indent_match):
-            prev_indent = indent_match.group(0)
-        wrapped.append(textwrap.fill(line, width=cols, subsequent_indent=prev_indent))
-    return '\n'.join(wrapped)
 
 
 def strip_pagebreaks_old(text):

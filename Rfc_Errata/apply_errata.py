@@ -157,23 +157,6 @@ class apply_errata(object):
         if section not in self.knownSections:
             self.knownSections.append(section)
 
-    def parseTOC(self, lineNo):
-        # Different people have different styles for TOCs.  The new ones are easy to parse, but the
-        # old ones are a total mess
-        #  Old ones may have spaces in them so it makes the logic slightly harder
-
-        if self.source[lineNo][0] != ' ':
-            return lineNo
-
-        lineNo += 1
-        self.header_re = self.header_re2
-        while lineNo < len(self.source):
-            m = re.match("\s*1(.0)?", self.source[lineNo])
-            if m:
-                return lineNo + 1
-            lineNo += 1
-        return lineNo
-
     def isSectionStart(self, line, i):
         if line.strip().lower() in self.knownSections:
             if line.strip().lower() == "table of contents":
@@ -394,6 +377,9 @@ class apply_errata(object):
 
         # print("section = {0}   Number of inserts = {1}".format(section, len(itemList)))
         # print("original:\n{0}".format(searchText))
+
+        if len(itemList) == 0:
+            return
 
         editedText = searchText
         locations = []
