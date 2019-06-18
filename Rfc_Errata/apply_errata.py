@@ -584,16 +584,13 @@ class apply_errata(object):
                 if len(x) >= 2:
                     print("{0}: {1}\n    {2}\n".format(item["errata_id"], x[0], x[1]))
 
-            if "notes" in item and item["notes"]:
-                item["notes"] = item["notes"].replace("\n", "<br/>")
-
             errataFooter += self.substitute(self.templates.endNote, item)
             self.EndnoteCount += 1
 
         self.errataFooter = errataFooter
 
     def buildHeader(self):
-        anchorTemplate = " <a href='#eid{0}'>Errata {0}</a>, "
+        anchorTemplate = " <a href='#eid{0}'>EID {0}</a>, "
 
         ids = sorted(self.toApply, key=sortById)
 
@@ -618,7 +615,11 @@ class apply_errata(object):
         fields2 = {}
         for k in fields:
             if isinstance(fields[k], str):
-                fields2[k] = html.escape(fields[k])
+                lines = fields[k].splitlines()
+                lines = [html.escape(line) for line in lines]
+                fields2[k] = '\n'.join(lines)
+                if k == "notes":
+                    fields2["notes"] = fields2["notes"].replace("\n", "<br/>")
             else:
                 fields2[k] = fields[k]
         return template.substitute(fields2)
