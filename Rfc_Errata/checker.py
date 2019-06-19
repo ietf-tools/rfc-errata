@@ -115,7 +115,7 @@ class checker(object):
     def processRFC(self, rfc, force, templates):
         if rfc not in self.byRfc:
             print("{0} does not have any current errata".format(rfc))
-            return
+            return 0
 
         try:
             txt_file = os.path.join(self.state["text"], "{0}.txt".format(rfc))
@@ -148,7 +148,7 @@ class checker(object):
                                 print(errText)
                             with open("errors.log", "a") as f:
                                 f.write(datetime.datetime.now().isoformat() + ": " + errText)
-                            return
+                            return 1
 
             x = apply_errata(self.byRfc[rfc], self.options, self.state)
             x.apply(force, templates)
@@ -176,17 +176,21 @@ class checker(object):
                 print("Error processing {0}. {1}\n".format(rfc, e))
             with open("errors.log", "a") as f:
                 f.write(datetime.datetime.now().isoformat() + ": Error processing {0}.  {1}\n".format(rfc, e))
+            return 1
+        return 0
 
     def processAllRfcs(self, templates):
 
         # create the output directories if needed
 
         byRfcOrdered = sorted(self.byRfc)
+        errorCount = 0
 
         for rfc in byRfcOrdered:
-            self.processRFC(rfc, self.options.force, templates)
+            errorCount += self.processRFC(rfc, self.options.force, templates)
+        return errorCount
 
-    def printStats(self):
+    def printStats(self, errorCount):
         if self.options.verbose:
             allLines = self.inlineCount + self.sectionCount + self.endnoteCount
             if allLines == 0:
@@ -198,6 +202,8 @@ class checker(object):
             print("End     = {0:4}     {1:2.2f}      414".format(self.endnoteCount,
                                                                  self.endnoteCount/allLines*100))
             print("Total   = {0:4}".format(allLines))
+            if errorCount > 0:
+                print("Error Count: {0}".format(errorCount))
 
     def downloadErrataFile(self):
         try:
