@@ -188,8 +188,9 @@ def main2():
         templates_path = os.path.join(os.path.dirname(__file__), "Template")
     templates = Templates(templates_path)
 
+    errorCount = 0
     if options.all:
-        check.processAllRfcs(templates)
+        errorCount = check.processAllRfcs(templates)
     else:
         for rfc in args:
             rfc = rfc.upper()
@@ -199,7 +200,7 @@ def main2():
                 else:
                     print("Only RFCs can be provided for update.  Use RFCXXXX")
 
-            check.processRFC(rfc, options.force, templates)
+            errorCount += check.processRFC(rfc, options.force, templates)
             # if False:
             #    with open('rfc/' + rfc + '.txt') as f:
             #        text = f.read()
@@ -207,10 +208,11 @@ def main2():
             #    with open('html2/' + rfc + '.html', "w") as f:
             #        f.write(html)
 
-    check.printStats()
+    check.printStats(errorCount)
 
     if updateState:
         writeState(state)
+    exit(errorCount)
 
 
 def main():
@@ -219,6 +221,7 @@ def main():
     except Exception as e:
         with open("errors.log", "a") as f:
             f.write("Error while process:\n{0}\n".format(e))
+        exit(1)
 
 
 if __name__ == '__main__':

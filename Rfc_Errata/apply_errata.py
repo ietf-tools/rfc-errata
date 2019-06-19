@@ -392,6 +392,8 @@ class apply_errata(object):
                     newText = item[0]["orig_text2"] if item[0]["status_tag"] == "Rejected" else item[0]["correct_text2"]
                 else:
                     newText = item[0]["orig_text"] if item[0]["status_tag"] == "Rejected" else item[0]["correct_text"]
+                if not newText:
+                    newText = ""
                 newText = html.escape(newText)
                 editedText = editedText[:match.start()] +  \
                     self.inlineFormat.format(item[0]["status_tag"], item[0]["errata_id"], newText) + \
