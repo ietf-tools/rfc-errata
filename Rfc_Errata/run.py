@@ -98,11 +98,11 @@ def main2():
         state["textDir"] = options.text
         updateState = True
 
-    if options.html and options.html != state["htmlDir"]:
-        state["htmlDir"] = options.html
+    if options.html and options.html != state["html"]:
+        state["html"] = options.html
         updateState = True
 
-    if options.path and options.html != state["cssPath"]:
+    if options.path and options.path != state["cssPath"]:
         state["cssPath"] = options.path
         updateState = True
 
