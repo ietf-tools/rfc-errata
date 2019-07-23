@@ -1,3 +1,9 @@
+rfc-errata (0.2.0) distribution(s); urgency=low
+
+	* Fixed an error when specifying the html directory.
+
+-- Jim Schaad <ietf@augustcellars.com>  Mon 22 July 2019 12:00:00 -0800
+
 rfc-errata (0.1.5) distribution(s); urgency=low
 
 	* RFC Editor requested some changes in how the templates are worded
