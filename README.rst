@@ -36,7 +36,7 @@ run either to update all RFCs that have errata or only a specific set of RFCs
     Short            Long                    Description
     ===============  ======================= ==================================================
     ``-s``           ``--server=``           provide a server to download errata and RFCs from
-    .                ``--no-network``        do not download files from the website
+    .                ``--no-network``        do not download errata.json from the website
     .                ``--templates=``        directory containing templates to be used
     .                ``--text=``             directory to store unmodified text RFCs in
     .                ``--html=``             directory to place modified HTML RFCs in
@@ -48,6 +48,7 @@ run either to update all RFCs that have errata or only a specific set of RFCs
     .                ``--verified=``         apply 'verified' errata (yes/no)
     .                ``--force``             rebuild all HTML files rather than using timestamps
     .                ``--nocopy``            clear destination copy list
+    .                ``--path``              path to css files in the HTML output
     .                ``--copyto``            specify the destinations to copy to (multiple)
     ``-v``           ``--verbose``           print extra information
     ``-V``           ``--version``           display the version number and exit

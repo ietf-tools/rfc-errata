@@ -1,3 +1,9 @@
+rfc-errata (0.2.1) distribution(s); urgency=low
+
+	* Update the header template to say this is not an offical RFC
+
+-- Jim Schaad <ietf@augustcellars.com>  Tue 06 August 2019 12:00:00 -0800
+
 rfc-errata (0.2.0) distribution(s); urgency=low
 
 	* Fixed an error when specifying the html directory.
