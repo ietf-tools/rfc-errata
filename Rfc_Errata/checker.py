@@ -97,6 +97,7 @@ class checker(object):
 
         for item in self.errata:
             item["section2"] = fixSection(item["section"]).lower()
+            item["doc-id"] = 'rfc{0}'.format(int(item["doc-id"][3:]))
 
             if item["errata_status_code"] == "Held for Document Update":
                 item["status_tag"] = "Held"
