@@ -193,10 +193,10 @@ def main2():
         errorCount = check.processAllRfcs(templates)
     else:
         for rfc in args:
-            rfc = rfc.upper()
-            if not rfc.startswith("RFC"):
+            rfc = rfc.lower()
+            if not rfc.startswith("rfc"):
                 if rfc.isdigit():
-                    rfc = "RFC" + rfc
+                    rfc = "rfc" + rfc
                 else:
                     print("Only RFCs can be provided for update.  Use RFCXXXX")
 
