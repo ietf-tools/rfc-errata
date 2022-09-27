@@ -29,7 +29,7 @@ jobs:
       uses: github/codeql-action/analyze@v2
 
   tests:
-    name: Unit Tests (${{ matrix.os }})
+    name: Unit Tests (${{ matrix.os }}, py${{ matrix.python-version }})
     runs-on: ${{ matrix.os }}-latest
     
     strategy:
