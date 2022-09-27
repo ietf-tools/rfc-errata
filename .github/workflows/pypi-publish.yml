@@ -61,14 +61,17 @@ jobs:
           echo "Using AUTO SEMVER mode: $NEXT_VERSION"
           echo "SHOULD_DEPLOY=true" >> $GITHUB_ENV
           echo "PKG_VERSION=$NEXT_VERSION" >> $GITHUB_ENV
+          echo "::notice::Release $NEXT_VERSION created using branch $GITHUB_REF_NAME"
         elif [[ "$GITHUB_REF" =~ ^refs/tags/* ]]; then
           echo "Using TAG mode: $GITHUB_REF_NAME"
           echo "SHOULD_DEPLOY=true" >> $GITHUB_ENV
           echo "PKG_VERSION=$GITHUB_REF_NAME" >> $GITHUB_ENV
+          echo "::notice::Release $GITHUB_REF_NAME created using tag $GITHUB_REF_NAME"
         else
           echo "Using TEST mode: 0.0.1-dev.$GITHUB_RUN_NUMBER"
           echo "SHOULD_DEPLOY=false" >> $GITHUB_ENV
           echo "PKG_VERSION=0.0.1-dev.$GITHUB_RUN_NUMBER" >> $GITHUB_ENV
+          echo "::notice::Non-production build 0.0.1-dev.$GITHUB_RUN_NUMBER created using branch $GITHUB_REF_NAME"
         fi
     
     - name: Setup Python
