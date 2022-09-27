@@ -31,7 +31,7 @@ jobs:
         fetch-depth: 0
         
     - name: Get Next Version
-      if: ${{ github.event.inputs.publish }}
+      if: ${{ github.event.inputs.publish == 'true' }}
       id: semver
       uses: ietf-tools/semver-action@v1
       with:
@@ -39,15 +39,13 @@ jobs:
         branch: main
         
     - name: Set Next Version Env Var
-      if: ${{ github.event.inputs.publish }}
-      env:
-        NEXT_VERSION: ${{ steps.semver.outputs.next }}
+      if: ${{ github.event.inputs.publish == 'true' }}
       run: |
-        echo "NEXT_VERSION=$next" >> $GITHUB_ENV
+        echo "NEXT_VERSION=$nextStrict" >> $GITHUB_ENV
         
     - name: Create Draft Release
       uses: ncipollo/release-action@v1
-      if: ${{ github.event.inputs.publish }}
+      if: ${{ github.event.inputs.publish == 'true' }}
       with:
         prerelease: true
         draft: false
