@@ -1,6 +1,5 @@
-include changelog
 include LICENSE
-include README.rst
+include README.md
 include requirements.txt
 include Rfc_Errata/run.py
 include Rfc_Errata/__init__.py

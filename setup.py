@@ -1,7 +1,7 @@
 #!/usr/bin/env python
-# --------------------------------------------------
-# Copyright The IETF Trust 2018, All Rights Reserved
-# --------------------------------------------------
+# -------------------------------------------------------
+# Copyright The IETF Trust 2018-2022, All Rights Reserved
+# -------------------------------------------------------
 
 import re
 from setuptools import setup, find_packages
@@ -11,81 +11,31 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-with open(path.join(here, 'README.rst'), encoding='utf-8') as file:
+with open(os.path.join(here, 'README.md'), encoding='utf-8') as file:
     long_description = file.read()
-    long_description = long_description.replace('\r', '')
 
 # Get the requirements from the local requirements.txt file
 with open(path.join(here, 'requirements.txt'), encoding='utf-8') as file:
     requirements = file.read().splitlines()
 
-# Get additional items from the local MANIFEST.in file
-with open(path.join(here, 'MANIFEST.in'), encoding='utf-8') as file:
-    extra_files = [ l.split()[1] for l in file.read().splitlines() if l ]
-
-def parse(changelog):
-    ver_line = "^([a-z0-9+-]+) \(([^)]+)\)(.*?) *$"
-    sig_line = "^ ?-- ([^<]+) <([^>]+)>  (.*?) *$"
-
-    entries = []
-    if type(changelog) == type(''):
-        changelog = open(changelog, mode='rU', encoding='utf-8')
-    for line in changelog:
-        if re.match(ver_line, line):
-            package, version, rest = re.match(ver_line, line).groups()
-            entry = {}
-            entry["package"] = package
-            entry["version"] = version
-            entry["logentry"] = ""
-        elif re.match(sig_line, line):
-            author, email, date = re.match(sig_line, line).groups()
-            entry["author"] = author
-            entry["email"] = email
-            entry["datetime"] = date
-            entry["date"] = " ".join(date.split()[:3])
-
-            entries += [ entry ]
-        else:
-            entry["logentry"] += line.rstrip() + '\n'
-    changelog.close()
-    return entries
-
-changelog_entry_template = """
-Version %(version)s (%(date)s)
-------------------------------------------------
-
-%(logentry)s
-
-"""
-
-long_description += """
-Changelog
-=========
-
-""" + "\n".join([ changelog_entry_template % entry for entry in parse("changelog")[:3] ])
-
-long_description = long_description.replace('\r', '')
-
 import Rfc_Errata
 
 setup(
     name='rfc-errata',
-
-    # Versions should comply with PEP440.
-    version=Rfc_Errata.__version__,
-
     description="Build html files from the text RFCs and the errata database.",
     long_description=long_description,
+    long_description_content_type="text/markdown",
     
     # The projects main homepage.
-    url='https://tools.ietf.org/tools/ietfdb/browser/brance/elft/rfc-errata/',
+    url='https://github.com/ietf-tools/rfc-errata',
+    download_url = "https://github.com/ietf-tools/rfc-errata/releases",
 
     # Author details
     author='Jim Schaad',
-    author_email='ietf@augustcellars.com',
+    author_email='tools-discuss@ietf.org',
 
     # Choose your license
-    license='Simplified BSD',
+    license='BSD-3-Clause',
 
     # Classifiers
     classifiers = [
