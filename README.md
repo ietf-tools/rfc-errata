@@ -2,7 +2,7 @@
     
 <img src="https://raw.githubusercontent.com/ietf-tools/common/main/assets/logos/rfc-errata.svg" alt="RFC-Errata" height="125" />
     
-[![Release](https://img.shields.io/github/release/ietf-tools/rfa-errata.svg?style=flat&cacheSeconds=600)](https://github.com/ietf-tools/rfc-errata/releases)
+[![Release](https://img.shields.io/github/release/ietf-tools/rfc-errata.svg?style=flat&cacheSeconds=600)](https://github.com/ietf-tools/rfc-errata/releases)
 [![License](https://img.shields.io/github/license/ietf-tools/rfc-errata)](https://github.com/ietf-tools/rfc-errata/blob/main/LICENSE)
 [![PyPI - Version](https://img.shields.io/pypi/v/rfc-errata)](https://pypi.org/project/rfc-errata/)
 [![PyPI - Status](https://img.shields.io/pypi/status/rfc-errata)](https://pypi.org/project/rfc-errata/)
