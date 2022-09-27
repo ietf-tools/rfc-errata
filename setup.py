@@ -3,10 +3,16 @@
 # Copyright The IETF Trust 2018-2022, All Rights Reserved
 # -------------------------------------------------------
 
-import re
-from setuptools import setup, find_packages
+import os
 from codecs import open
-from os import path
+from setuptools import setup, find_packages
+import sys
+# This workaround is necessary to make setup.py upload work with non-ascii
+# arguments to setup().  
+try:
+    reload(sys).setdefaultencoding("UTF-8") 
+except NameError:
+    pass
 
 here = path.abspath(path.dirname(__file__))
 
@@ -15,7 +21,7 @@ with open(os.path.join(here, 'README.md'), encoding='utf-8') as file:
     long_description = file.read()
 
 # Get the requirements from the local requirements.txt file
-with open(path.join(here, 'requirements.txt'), encoding='utf-8') as file:
+with open(os.path.join(here, 'requirements.txt'), encoding='utf-8') as file:
     requirements = file.read().splitlines()
 
 import Rfc_Errata
