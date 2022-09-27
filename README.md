@@ -2,7 +2,7 @@
     
 <img src="https://raw.githubusercontent.com/ietf-tools/common/main/assets/logos/rfc-errata.svg" alt="RFC-Errata" height="125" />
     
-[![Release](https://img.shields.io/github/release/ietf-tools/rfa-errata.svg?style=flat&maxAge=600)](https://github.com/ietf-tools/rfc-errata/releases)
+[![Release](https://img.shields.io/github/release/ietf-tools/rfa-errata.svg?style=flat&cacheSeconds=600)](https://github.com/ietf-tools/rfc-errata/releases)
 [![License](https://img.shields.io/github/license/ietf-tools/rfc-errata)](https://github.com/ietf-tools/rfc-errata/blob/main/LICENSE)
 [![PyPI - Version](https://img.shields.io/pypi/v/rfc-errata)](https://pypi.org/project/rfc-errata/)
 [![PyPI - Status](https://img.shields.io/pypi/status/rfc-errata)](https://pypi.org/project/rfc-errata/)
@@ -30,23 +30,23 @@ rfc-errata pulls all needed information to run from the [RFC Editor] website. Th
     ===============  ======================= ==================================================
     Short            Long                    Description
     ===============  ======================= ==================================================
-    ``-s``           ``--server=``           provide a server to download errata and RFCs from
-    .                ``--no-network``        do not download errata.json from the website
-    .                ``--templates=``        directory containing templates to be used
-    .                ``--text=``             directory to store unmodified text RFCs in
-    .                ``--html=``             directory to place modified HTML RFCs in
-    .                ``--css=``              relative location for CSS files at final website
-    .                ``--all``               update all RFCs rather than a list of RFCs
-    .                ``--reported=``         apply 'reported' errata (yes/no)
-    .                ``--held=``             apply 'held for update' errata (yes/no)
-    .                ``--rejected=``         apply 'rejected' errata (yes/no)
-    .                ``--verified=``         apply 'verified' errata (yes/no)
-    .                ``--force``             rebuild all HTML files rather than using timestamps
-    .                ``--nocopy``            clear destination copy list
-    .                ``--path``              path to css files in the HTML output
-    .                ``--copyto``            specify the destinations to copy to (multiple)
-    ``-v``           ``--verbose``           print extra information
-    ``-V``           ``--version``           display the version number and exit
+    -s               --server=               provide a server to download errata and RFCs from
+    .                --no-network            do not download errata.json from the website
+    .                --templates=            directory containing templates to be used
+    .                --text=                 directory to store unmodified text RFCs in
+    .                --html=                 directory to place modified HTML RFCs in
+    .                --css=                  relative location for CSS files at final website
+    .                --all                   update all RFCs rather than a list of RFCs
+    .                --reported=             apply 'reported' errata (yes/no)
+    .                --held=                 apply 'held for update' errata (yes/no)
+    .                --rejected=             apply 'rejected' errata (yes/no)
+    .                --verified=             apply 'verified' errata (yes/no)
+    .                --force                 rebuild all HTML files rather than using timestamps
+    .                --nocopy                clear destination copy list
+    .                --path                  path to css files in the HTML output
+    .                --copyto                specify the destinations to copy to (multiple)
+    -v               --verbose               print extra information
+    -V               --version               display the version number and exit
     ===============  ======================= ==================================================
 
 ### Operations
