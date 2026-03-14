@@ -51,10 +51,8 @@ jobs:
         python --version
         echo "Installing pip + wheel..."
         python -m pip install --upgrade pip wheel
-        echo "Installing requirements.txt + test dependencies..."
-        python -m pip install -r requirements.txt pycodestyle pyflakes
-        echo "Run setup.py..."
-        python setup.py --quiet install
+        echo "Installing package and test dependencies..."
+        python -m pip install .[test]
         
     - name: Run Tests
       working-directory: Rfc_Errata
