@@ -512,16 +512,16 @@ def compare_file(errFile, stderr, displayError):
     lines2 = [line.replace('$$CWD$$', cwd) for line in lines2]
 
     d = difflib.Differ()
-    result = list(d.compare(lines1, lines2))
+    results = list(d.compare(lines1, lines2))
 
     hasError = False
-    for l in result:
-        if l[0:2] == '+ ' or l[0:2] == '- ':
+    for result in results:
+        if result[0:2] == '+ ' or result[0:2] == '- ':
             hasError = True
             break
     if hasError and displayError:
         print("stderr")
-        print("".join(result))
+        print("".join(results))
         return False
     return True
 
@@ -559,16 +559,16 @@ def check_process(tester, args, stdoutFile, errFiles, generatedFile, compareFile
             lines1 = [line.replace('\r', '') for line in lines1]
 
         d = difflib.Differ()
-        result = list(d.compare(lines1, lines2))
+        results = list(d.compare(lines1, lines2))
 
         hasError = False
-        for l in result:
-            if l[0:2] == '+ ' or l[0:2] == '- ':
+        for result in results:
+            if result[0:2] == '+ ' or result[0:2] == '- ':
                 hasError = True
                 break
         if hasError:
             print("stdout:")
-            print("".join(result))
+            print("".join(results))
             returnValue = False
 
     if errFiles is not None:
@@ -589,17 +589,17 @@ def check_process(tester, args, stdoutFile, errFiles, generatedFile, compareFile
             lines1 = f.readlines()
 
         d = difflib.Differ()
-        result = list(d.compare(lines1, lines2))
+        results = list(d.compare(lines1, lines2))
 
         hasError = False
-        for l in result:
-            if l[0:2] == '+ ' or l[0:2] == '- ':
+        for result in results:
+            if result[0:2] == '+ ' or result[0:2] == '- ':
                 hasError = True
                 break
 
         if hasError:
             print(generatedFile)
-            print("".join(result))
+            print("".join(results))
             returnValue = False
 
     tester.assertTrue(returnValue, "Comparisons failed")
