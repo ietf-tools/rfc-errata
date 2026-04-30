@@ -1,43 +1,50 @@
-<style type="text/css">
-    .verified {color: green}
-    .supplementary-styling {
-        background-color: yellow
-    }
-    .old-text {color: red}
+.verified {
+    color: green
+}
 
-    .Verified-headnote-styling, .Verified-endnote-styling  {
-        background-color: LightGreen;
-        color: black;
-    }
+.supplementary-styling {
+    background-color: yellow
+}
 
-    .Verified-inline-styling {
-        color: Green;
-    }
+.old-text {
+    color: red
+}
 
-    .Held-headnote-styling, .Held-endnote-styling {
-        background-color: LightBlue;
-        color: black;
-    }
+.Verified-headnote-styling,
+.Verified-endnote-styling {
+    background-color: LightGreen;
+    color: black;
+}
 
-    .Held-inline-styling {
-        color: Blue;
-    }
+.Verified-inline-styling {
+    color: Green;
+}
 
-    .Reported-headnote-styling, .Reported-endnote-styling {
-        background-color: Beige;
-    }
+.Held-headnote-styling,
+.Held-endnote-styling {
+    background-color: LightBlue;
+    color: black;
+}
 
-    .Reported-inline-styling {
-        color:GoldenRod;
-    }
+.Held-inline-styling {
+    color: Blue;
+}
 
-    .Rejected-headnote-styling, .Rejected-endnote-styling {
-        background-color: LightPink;
-        color: black;
-    }
+.Reported-headnote-styling,
+.Reported-endnote-styling {
+    background-color: Beige;
+}
 
-    .Rejected-inline-styling {
-        color: red;
-    }
+.Reported-inline-styling {
+    color: GoldenRod;
+}
 
-</style>
+.Rejected-headnote-styling,
+.Rejected-endnote-styling {
+    background-color: LightPink;
+    color: black;
+}
+
+.Rejected-inline-styling {
+    color: red;
+}
