@@ -1,0 +1,55 @@
+# -------------------------------------------------------
+# Copyright The IETF Trust 2018-2026, All Rights Reserved
+# -------------------------------------------------------
+
+[build-system]
+requires = ["setuptools>=61.2"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "rfc-errata"
+version = "0.3.0"
+authors = [
+  {name = "Jim Schaad", email = "tools-discuss@ietf.org"},
+]
+description = "Build html files from the text RFCs and the errata database."
+keywords = ["errata", "rfc"]
+readme = "README.md"
+license = "BSD-3-Clause"
+license-files = ["LICENSE"]
+requires-python = ">=3.9"
+classifiers = [
+    'Development Status :: 2 - Pre-Alpha',
+    'Intended Audience :: Other Audience',
+    'Topic :: Text Processing',
+    'Topic :: Text Processing :: Markup :: XML',
+    'Programming Language :: Python :: 3.9',
+    'Programming Language :: Python :: 3.10',
+    'Programming Language :: Python :: 3.11',
+    'Programming Language :: Python :: 3.12',
+    'Programming Language :: Python :: 3.13',
+    'Programming Language :: Python :: 3.14',
+]
+dependencies = []
+
+[project.urls]
+homepage = "https://github.com/ietf-tools/rfc-errata"
+source = "https://github.com/ietf-tools/rfc-errata"
+issues = "https://github.com/ietf-tools/rfc-errata/issues"
+releasenotes = "https://github.com/ietf-tools/rfc-errata/releases"
+
+[project.optional-dependencies]
+test = [
+	"pycodestyle",
+	"pyflakes",
+]
+
+[project.scripts]
+rfc-errata = "Rfc_Errata.run:main"
+
+[tool.setuptools]
+packages = ["Rfc_Errata"]
+include-package-data = true
+
+[tool.setuptools.package-data]
+rfc-errata = ["Template/*", "css/*"]
