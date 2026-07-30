@@ -1,43 +1,45 @@
-<style type="text/css">
-    .Verified-headnote-styling, .Verified-endnote-styling  {
-        font-wieght: bold;
-    }
-    .Verified-inline-styling {
-        font-wieght: bold;
-        background-color: lightGrey;
-    }
+.Verified-headnote-styling,
+.Verified-endnote-styling {
+    font-weight: bold;
+}
 
-    .Held-headnote-styling, .Held-endnote-styling {
-        font-style: italic;
-    }
+.Verified-inline-styling {
+    font-weight: bold;
+    background-color: lightGrey;
+}
 
-    .Held-inline-styling {
-        font-style: italic;
-        background-color: lightGrey;
-    }
+.Held-headnote-styling,
+.Held-endnote-styling {
+    font-style: italic;
+}
 
-    .Reported-headnote-styling, .Reported-endnote-styling {
-        background-color: Beige;
-    }
-    
-    .Reported-inline-styling {
-        color: Yellow;
-    }
+.Held-inline-styling {
+    font-style: italic;
+    background-color: lightGrey;
+}
 
-    .Rejected-headnote-styling, .Rejected-endnote-styling {
-        background-color: LightPink;
-    }
+.Reported-headnote-styling,
+.Reported-endnote-styling {
+    background-color: Beige;
+}
 
-    .Rejected-inline-styling {
-        color: red;
-    }
+.Reported-inline-styling {
+    color: Yellow;
+}
 
-    .nodeCloseClass {
-        display:inline;
-    }
+.Rejected-headnote-styling,
+.Rejected-endnote-styling {
+    background-color: LightPink;
+}
 
-    .nodeOpenClass {
-        display:inline;
-    }
-    
-</style>
+.Rejected-inline-styling {
+    color: red;
+}
+
+.nodeCloseClass {
+    display: inline;
+}
+
+.nodeOpenClass {
+    display: inline;
+}
