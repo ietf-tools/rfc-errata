@@ -8,7 +8,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "rfc-errata"
-version = "0.3.0"
+dynamic = ["version"]
 authors = [
   {name = "Jim Schaad", email = "tools-discuss@ietf.org"},
 ]
@@ -50,6 +50,9 @@ rfc-errata = "Rfc_Errata.run:main"
 [tool.setuptools]
 packages = ["Rfc_Errata"]
 include-package-data = true
+
+[tool.setuptools.dynamic]
+version = {attr = "Rfc_Errata.__version__"}
 
 [tool.setuptools.package-data]
 rfc-errata = ["Template/*", "css/*"]
