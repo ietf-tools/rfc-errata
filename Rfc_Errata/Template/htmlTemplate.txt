@@ -20,7 +20,7 @@
         $HEADER
         <pre>
 $BODY
-        </re>
+        </pre>
         $FOOTER
     </body>
 </html>
